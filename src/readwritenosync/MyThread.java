@@ -8,11 +8,10 @@ public class MyThread extends Thread {
     private final char[] operations;
 
     public MyThread(String name, Random randomGenerator, char[] operations) {
-        super();
-        super.setName(name);
-        counter = 0;
+        super(name);
         this.randomGenerator = randomGenerator;
         this.operations = operations;
+        this.counter = 0;
     }
 
     public void run() {
