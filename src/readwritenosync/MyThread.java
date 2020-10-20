@@ -4,12 +4,12 @@ import java.util.Random;
 
 public class MyThread extends Thread {
     private int counter;
-    private final Random randomGenerator;
+    private final Random random;
     private final char[] operations;
 
-    public MyThread(String name, Random randomGenerator, char[] operations) {
+    public MyThread(String name, Random random, char[] operations) {
         super(name);
-        this.randomGenerator = randomGenerator;
+        this.random = random;
         this.operations = operations;
         this.counter = 0;
     }
@@ -23,7 +23,7 @@ public class MyThread extends Thread {
                     System.out.printf("[%s] Lettura risorsa: %d\n", this.getName(), this.getCounter());
                     break;
                 case 'W':
-                    int temp = randomGenerator.nextInt(100);
+                    int temp = random.nextInt(100);
                     Risorsa.setCounter(temp);
                     System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), temp);
                     break;
