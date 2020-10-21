@@ -1,7 +1,5 @@
 package readwritenosync;
 
-import java.util.Random;
-
 public class MyThread extends Thread {
     private final char[] operations;
     private final int write;

@@ -4,14 +4,12 @@ import java.util.Random;
 
 public class Main {
     public static void main(String[] args) {
-        Random random = new Random();
-
         MyThread t1 = new MyThread("t1", 1, new char[]{'W', 'W'});
         MyThread t2 = new MyThread("t2", 2, new char[]{'W', 'R'});
         MyThread t3 = new MyThread("t3", 3, new char[]{'R', 'W'});
         MyThread t4 = new MyThread("t4", 4, new char[]{'W', 'R'});
 
-        MyThread last = new MyThread("last", -1, new char[]{'R'});
+        MyThread last = new MyThread("last", new char[]{'R'});
 
         t1.start();
         t2.start();
