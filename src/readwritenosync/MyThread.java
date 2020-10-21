@@ -4,6 +4,7 @@ public class MyThread extends Thread {
     private final char[] operations;
     private final int write;
     private int read;
+    private double duration;
 
     public MyThread(String name, int write, char[] operations) {
         super(name);
@@ -12,31 +13,33 @@ public class MyThread extends Thread {
         this.read = 0;
     }
 
-    public MyThread(String name, char[] operations) {
-        super(name);
-        this.operations = operations;
-        this.write = 0;
-        this.read = 0;
-    }
-
     public void run() {
         System.out.printf("[%s] Avvio thread\n", this.getName());
-        for (char operation : operations) {
-            switch (operation) {
-                case 'R':
-                    read = Risorsa.getDato();
-                    System.out.printf("[%s] Lettura risorsa: %d\n", this.getName(), this.getRead());
-                    break;
-                case 'W':
-                    Risorsa.setDato(write);
-                    System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), write);
-                    break;
+        long startTime = System.nanoTime();
+        synchronized (Risorsa.class) {
+            for (char operation : operations) {
+                switch (operation) {
+                    case 'R':
+                        this.read = Risorsa.getDato();
+                        System.out.printf("[%s] Lettura risorsa: %d\n", this.getName(), this.getRead());
+                        break;
+                    case 'W':
+                        Risorsa.setDato(this.write);
+                        System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), this.write);
+                        break;
+                }
             }
         }
-        System.out.printf("[%s] Termine thread\n", this.getName());
+        long endTime = System.nanoTime();
+        this.duration = (double)(endTime - startTime) / 1000000;
+        System.out.printf("[%s] Termine thread; durata: %.2fms\n", this.getName(), this.getDuration());
     }
 
     public int getRead() {
         return read;
+    }
+
+    public double getDuration() {
+        return duration;
     }
 }
