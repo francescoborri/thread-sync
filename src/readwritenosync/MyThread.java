@@ -27,6 +27,9 @@ public class MyThread extends Thread {
                         Risorsa.setDato(this.write);
                         System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), this.write);
                         break;
+                    default:
+                        System.out.println("[%s] Nessuna operazione");
+                        break;
                 }
             }
         }
