@@ -1,13 +1,13 @@
 package readwritenosync;
 
 public class Risorsa {
-    private static int counter;
+    private static int dato;
 
-    public static int getCounter() {
-        return counter;
+    public static int getDato() {
+        return dato;
     }
 
-    public static void setCounter(int counter) {
-        Risorsa.counter = counter;
+    public static void setDato(int dato) {
+        Risorsa.dato = dato;
     }
 }

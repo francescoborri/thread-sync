@@ -3,15 +3,22 @@ package readwritenosync;
 import java.util.Random;
 
 public class MyThread extends Thread {
-    private int counter;
-    private final Random random;
     private final char[] operations;
+    private final int write;
+    private int read;
 
-    public MyThread(String name, Random random, char[] operations) {
+    public MyThread(String name, int write, char[] operations) {
         super(name);
-        this.random = random;
         this.operations = operations;
-        this.counter = 0;
+        this.write = write;
+        this.read = 0;
+    }
+
+    public MyThread(String name, char[] operations) {
+        super(name);
+        this.operations = operations;
+        this.write = 0;
+        this.read = 0;
     }
 
     public void run() {
@@ -19,20 +26,19 @@ public class MyThread extends Thread {
         for (char operation : operations) {
             switch (operation) {
                 case 'R':
-                    counter = Risorsa.getCounter();
-                    System.out.printf("[%s] Lettura risorsa: %d\n", this.getName(), this.getCounter());
+                    read = Risorsa.getDato();
+                    System.out.printf("[%s] Lettura risorsa: %d\n", this.getName(), this.getRead());
                     break;
                 case 'W':
-                    int temp = random.nextInt(100);
-                    Risorsa.setCounter(temp);
-                    System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), temp);
+                    Risorsa.setDato(write);
+                    System.out.printf("[%s] Scrittura risorsa: %d\n", this.getName(), write);
                     break;
             }
         }
         System.out.printf("[%s] Termine thread\n", this.getName());
     }
 
-    public int getCounter() {
-        return counter;
+    public int getRead() {
+        return read;
     }
 }
