@@ -1,4 +1,4 @@
-package readwritenosync;
+package readwrite;
 
 public class Risorsa {
     private static int dato;

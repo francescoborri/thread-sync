@@ -1,4 +1,4 @@
-package readwritenosync;
+package readwrite;
 
 public class MyThread extends Thread {
     private final char[] operations;
