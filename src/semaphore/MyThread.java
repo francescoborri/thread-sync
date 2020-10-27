@@ -27,10 +27,10 @@ public class MyThread extends Thread {
                         Thread.sleep(random);
                     }
                 } finally {
+                    System.out.print('|');
                     if (lock)
                         semaphore.release();
                 }
-                System.out.print('|');
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

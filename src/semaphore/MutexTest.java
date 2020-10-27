@@ -8,22 +8,29 @@ public class MutexTest {
     public static void main(String[] args) throws Exception {
         System.out.println("Without Locking:");
         MyThread th1 = new MyThread(false, '$', semaphore);
-        th1.start();
         MyThread th2 = new MyThread(false, '#', semaphore);
-        th2.start();
 
+        long withoutLockingStart = System.nanoTime();
+        th1.start();
+        th2.start();
         th1.join();
         th2.join();
+        double withoutLockingDuration = (double)(System.nanoTime() - withoutLockingStart) / 1000000;
+
         System.out.println('\n');
 
         System.out.println("With Locking:");
         MyThread th3 = new MyThread(true, '$', semaphore);
-        th3.start();
         MyThread th4 = new MyThread(true, '#', semaphore);
-        th4.start();
 
+        long withLockingStart = System.nanoTime();
+        th3.start();
+        th4.start();
         th3.join();
         th4.join();
-        System.out.println('\n');
+        double withLockingDuration = (double)(System.nanoTime() - withLockingStart) / 1000000;
+
+        System.out.printf("\n\nDuration without locking: %.2fms\nDuration with locking: %.2fms\n",
+                withoutLockingDuration, withLockingDuration);
     }
 }
