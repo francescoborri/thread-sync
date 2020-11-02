@@ -1,7 +1,7 @@
 package semaphorecounter;
 
 public class Counter {
-    private static int counter;
+    private static int counter = 1;
 
     public static int getCounter() {
         return counter;
