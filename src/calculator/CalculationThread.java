@@ -14,10 +14,16 @@ public class CalculationThread extends Thread {
         Scanner scanner = new Scanner(calculation);
         Pattern pattern = Pattern.compile("[+\\-*/]");
 
+        if (!scanner.hasNextInt())
+            throw new IllegalArgumentException();
         this.n1 = scanner.nextInt();
+
         if (!scanner.hasNext(pattern))
             throw new IllegalArgumentException();
         this.operation = Operation.fromSymbol(scanner.next(pattern).charAt(0));
+
+        if (!scanner.hasNextInt())
+            throw new IllegalArgumentException();
         this.n2 = scanner.nextInt();
     }
 
